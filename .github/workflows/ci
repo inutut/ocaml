@@ -1,0 +1,21 @@
+name: OCaml Homework CI
+
+on: [push, pull_request]
+
+jobs:
+  build-Ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.4
+
+      - run: opam install dune ounit2 qcheck ppx_inline_test
+
+      - name: Build all homeworks
+        run: opam exec -- dune build
+
+      - name: Run all tests
+        run: opam exec -- dune runtest
