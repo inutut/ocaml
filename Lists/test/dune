@@ -1,2 +1,6 @@
-(test
- (name test_Lists))
+(library
+ (name test_lists)
+ (inline_tests)
+ (preprocess (pps ppx_inline_test))
+ (libraries Lists)
+)
